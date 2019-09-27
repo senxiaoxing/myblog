@@ -4,3 +4,5 @@ node_modules
 
 # 头像文件夹
 public/img
+
+package-lock.json
