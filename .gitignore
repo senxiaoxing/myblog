@@ -2,6 +2,8 @@ node_modules
 
 .vscode
 
+logs
+
 # 头像文件夹
 public/img
 

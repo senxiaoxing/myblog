@@ -13,11 +13,19 @@
 
 ## 开始
 
-1. ``` git clone ```  
+1.  ``` 
+    git clone
+    ```  
 
-2. ``` npm install ```  
+2.  ``` 
+    npm install 
+    ```  
 
 3. 在mongoDB安装目录的bin文件夹里打开终端，配置MongoDB存放数据的路径  
-    ``` mongod --dbpath=D:\MongoClient\data ```
+    ```
+    mongod --dbpath=D:\MongoClient\data 
+    ```
 
-4. ``` node app.js ```  
+4.  ``` 
+    node app.js 
+    ```  
