@@ -1,0 +1,47 @@
+<%- include('header') %>
+
+<% if (posts.length>0) { %>
+<% posts.forEach(function (post) { %>
+  <%- include('components/post-content', { post: post }) %>
+<% }) %>
+
+<div class="post-content">
+  <div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+      <div class="ui right floated pagination menu">
+          <% if (pagenum>0) { %>
+        <a class="icon item" href="/posts?pagenum=<%-pagenum<1?1:parseInt(pagenum)-1 %>">
+          <i class="left chevron icon"></i>
+        </a>
+        <% } %>
+        <% if(page>5){%>
+            <a class="item" href="/posts?pagenum=1">1</a>
+            <a class="item" href="/posts?pagenum=2">2</a>
+            <a class="item" href="#">...</a>
+            <a class="item" href="/posts?pagenum=<%-page-1 %>"><%-page-1 %></a>
+            <a class="item" href="/posts?pagenum=<%-page %>"><%-page %></a>
+        <% }else{%>
+            <% for(let i = 0;i<page;i++){ %>
+                <a class="item" href="/posts?pagenum=<%-i+1 %>"><%-i+1 %></a>
+            <% } %>
+        <% } %>
+        <% if (pagenum>0) { %>
+        <a class="icon item" href="/posts?pagenum=<%-pagenum>page?page:parseInt(pagenum)+1%>">
+        <i class="right chevron icon"></i>
+        </a>
+        <% } %> 
+      </div>
+    </div>
+  </div>
+</div>
+<% } else { %>
+  <div class="ui grid">
+      <div class="four wide column"></div>
+    <div class="eight wide column">
+    <div class="item2">没有文章</div>
+    </div>
+  </div>
+<% } %>
+
+<%- include('footer') %>
