@@ -12,6 +12,8 @@ const winston = require('winston')
 const expressWinston = require('express-winston')
 
 const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io').listen(server)
 
 // 设置模板目录
 app.set('views', path.join(__dirname, 'views'))
@@ -98,6 +100,39 @@ app.use(function (err, req, res, next) {
 })
 
 // 监听端口，启动程序
-app.listen(config.port, function () {
+server.listen(config.port, function () {
   console.log(`${pkg.name} listening on port ${config.port}`)
 })
+
+let users = [];
+io.on('connection', function(socket) {
+  // 在线统计
+  socket.on('login', function(nickName) {
+      if ( users.indexOf(nickName) > -1 ) {
+          socket.emit('nickExisted')
+      } else {
+          socket.userIndex = users.length;//这里很巧妙,索引0对应第一个昵称
+          socket.nickName = nickName;
+          users.push(nickName);//push进去后数组长度是1,此时昵称索引是0
+          socket.emit('loginSuccess');//向自己發送登錄成功的消息
+
+          io.sockets.emit('system', nickName, users.length, 'login');//system向所有人发送当前用户登录的信息
+      }
+  });
+
+  socket.on('disconnect', function() {
+      users.splice(socket.userIndex, 1);//服務斷開時，從users里去掉離開的人
+
+      socket.broadcast.emit('system', socket.nickName, users.length, 'logout');//system向所有人發送當前用戶離開的信息
+  });
+
+  // 分发信息
+  socket.on('postMsg', function(msg, color) {
+      socket.broadcast.emit('newMsg', socket.nickName, msg, color);
+  });
+
+  // 分发图片
+  socket.on('img', function(imageData, color) {
+      socket.broadcast.emit('newImg', socket.nickName, imageData, color);
+  })
+});

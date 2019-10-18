@@ -1,5 +1,5 @@
 {
-  "name": "Node.js By Jason",
+  "name": "森小星",
   "version": "1.0.0",
   "description": "以梦为马，不负韶华",
   "main": "app.js",
@@ -23,6 +23,7 @@
     "objectid-to-timestamp": "^1.3.0",
     "serve-favicon": "^2.5.0",
     "sha1": "^1.1.1",
+    "socket.io": "^2.3.0",
     "winston": "^2.4.0"
   }
 }

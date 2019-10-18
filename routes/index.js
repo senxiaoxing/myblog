@@ -9,6 +9,7 @@ module.exports = function (app) {
     app.use('/posts', require('./posts'))
     app.use('/tags', require('./tags'))
     app.use('/comments', require('./comments'))
+    app.use('/chatroom', require('./chatroom'))
     // 404 page
     app.use(function (req, res) {
       //查看http响应是否响应了http头
