@@ -17,6 +17,7 @@ router.get('/:tag', checkLogin, function (req, res, next) {
   PostModel.getPoststag(author, tag)
     .then(function (posts) {
         let newPosts = posts.map(item => {
+            item.content = ''
             item.tagsArr = item.tag.split(/[,， ]/)
             return item
           })
@@ -31,6 +32,7 @@ router.get('/:tag', checkLogin, function (req, res, next) {
             PostModel.getPoststagpage(author, tag, size, pagenum)
             .then(function (posts) {
                 newPosts = posts.map(item => {
+                    item.content = ''
                     item.tagsArr = item.tag.split(/[,， ]/)
                     return item
                 })

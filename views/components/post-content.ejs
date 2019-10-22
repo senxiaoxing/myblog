@@ -24,10 +24,12 @@
               <% } %>
           </span>
           <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
-          <% post.tagsArr.forEach(function(tag) { %>
-            <a class="ui teal label" href="/tags/<%= tag %>"><%= tag %></a>
-          <% }) %>
           <pre><%- post.content %></pre>
+          <div>
+              <% post.tagsArr.forEach(function(tag) { %>
+                <a class="ui teal label" href="/tags/<%= tag %>"><%= tag %></a>
+              <% }) %>
+          </div>
           <div>
             <span class="tag"><%= post.created_at %></span>
             <span class="tag right">

@@ -19,6 +19,7 @@ router.get('/', function (req, res, next) {
   PostModel.getPosts(author)
     .then(function (posts) {
       let newPosts = posts.map(item => {
+        item.content = ''
         item.tagsArr = item.tag.split(/[,， ]/)
         return item
       })
@@ -32,6 +33,7 @@ router.get('/', function (req, res, next) {
         PostModel.getPostspage(author, size, pagenum)
           .then(function (posts) {
             newPosts = posts.map(item => {
+              item.content = ''
               item.tagsArr = item.tag.split(/[,， ]/)
               return item
             })
